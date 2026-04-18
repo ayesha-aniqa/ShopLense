@@ -146,10 +146,10 @@ http://localhost:8501
 
 | Model | Metric | Score |
 |---|---|---|
-| K-Means | Silhouette Score | *to be updated* |
-| DBSCAN | Silhouette Score | *to be updated* |
-| Random Forest | Accuracy | *to be updated* |
-| Random Forest | F1 Score | *to be updated* |
+| K-Means | Silhouette Score | *0.4737* |
+| DBSCAN | Silhouette Score | *0.6451* |
+| Random Forest | Accuracy | *0.9816* |
+| Random Forest | F1 Score | *0.98* |
 
 ---
 
@@ -160,11 +160,11 @@ http://localhost:8501
 | Python 3.10 | Core language |
 | Pandas | Data manipulation |
 | Scikit-learn | ML models |
-| TensorFlow / Keras | Autoencoder |
+| Pickle | Autoencoder |
 | Streamlit | Web application |
 | Plotly | Interactive charts |
 | SHAP | Model explainability |
-| GitHub Actions | CI/CD deployment |
+| GitHub Actions | Cloud deployment |
 
 ---
 
