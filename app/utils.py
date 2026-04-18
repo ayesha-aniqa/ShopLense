@@ -3,27 +3,27 @@ import os
 
 SEGMENT_CONFIG = {
     'Champions': {
-        'emoji': '👑', 'color': '#5B21B6', 'bg': 'rgba(91,33,182,0.08)',
+        'emoji': '👑', 'color': '#7B8FD4', 'bg': 'rgba(123,143,212,0.10)',
         'desc': 'Bought recently, buy often, spend the most',
         'action': 'Reward them — exclusive early access, loyalty perks, personal thank-you'
     },
     'Loyal Customers': {
-        'emoji': '💎', 'color': '#0E7490', 'bg': 'rgba(14,116,144,0.08)',
+        'emoji': '💎', 'color': '#6BAED6', 'bg': 'rgba(107,174,214,0.10)',
         'desc': 'Buy regularly with strong spending patterns',
         'action': 'Upsell premium products — they already trust you'
     },
     'Potential Loyalists': {
-        'emoji': '🌱', 'color': '#047857', 'bg': 'rgba(4,120,87,0.08)',
+        'emoji': '🌱', 'color': '#74C4B7', 'bg': 'rgba(116,196,183,0.10)',
         'desc': 'Recent buyers with growing frequency',
         'action': 'Offer membership or loyalty program to convert habit into loyalty'
     },
     'At Risk': {
-        'emoji': '⚠️', 'color': '#B45309', 'bg': 'rgba(180,83,9,0.08)',
+        'emoji': '⚠️', 'color': '#A8A0D2', 'bg': 'rgba(168,160,210,0.10)',
         'desc': 'Used to buy often but going quiet recently',
         'action': 'Send personalised win-back campaign with limited-time offer'
     },
     'Lost Customers': {
-        'emoji': '💤', 'color': '#B91C1C', 'bg': 'rgba(185,28,28,0.08)',
+        'emoji': '💤', 'color': '#95A5BD', 'bg': 'rgba(149,165,189,0.10)',
         'desc': "Haven't bought in a very long time",
         'action': 'Last-chance reactivation — steep discount or feedback survey'
     }
@@ -35,58 +35,43 @@ DATA_PATH = os.path.join(
     os.path.dirname(__file__), '..', 'data', 'processed', 'rfm_labeled.csv'
 )
 
-# Folder where the project's report figures live (relative to repo root)
-FIGURES_DIR = os.path.join(
-    os.path.dirname(__file__), '..', 'reports', 'figures'
-)
-
 def load_rfm_data() -> pd.DataFrame:
     return pd.read_csv(DATA_PATH)
 
-def figure_path(name: str) -> str:
-    """Return absolute path to a figure file inside reports/figures/."""
-    return os.path.join(FIGURES_DIR, name)
-
+# Font is loaded via <link> tag (not @import) so it works inside Streamlit's CSP
+FONT_LINK = """<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">"""
 
 APP_CSS = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
 /* ── Base ── */
 html, body, [class*="css"] {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #0f172a;
-    letter-spacing: -0.005em;
+    font-family: 'Inter', sans-serif;
+    color: #2D3A4A;
 }
 
-/* Full page pastel gradient background */
+/* Full page background */
 .stApp {
-    background: linear-gradient(145deg,
-        #eef2ff 0%,
-        #e0f2fe 25%,
-        #f0fdf4 50%,
-        #fdf4ff 75%,
-        #eff6ff 100%) !important;
+    background: #E8EDF5 !important;
     background-attachment: fixed !important;
 }
 
-/* Sidebar pastel */
+/* Sidebar */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #e0e7ff 0%, #cffafe 100%) !important;
-    border-right: 1px solid rgba(99,102,241,0.15) !important;
+    background: linear-gradient(180deg, #D6DEF0 0%, #CDDBE8 100%) !important;
+    border-right: 1px solid rgba(123,143,212,0.20) !important;
 }
 section[data-testid="stSidebar"] * {
-    color: #0f172a !important;
+    color: #2D3A4A !important;
 }
 
 /* ── Sidebar logo ── */
 .sidebar-logo {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.55rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
     font-weight: 800;
-    letter-spacing: -0.02em;
-    color: #1e1b4b !important;
-    background: linear-gradient(135deg, #1e1b4b, #075985);
+    background: linear-gradient(135deg, #7B8FD4, #6BAED6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     padding: 8px 0 20px;
@@ -94,293 +79,268 @@ section[data-testid="stSidebar"] * {
 
 /* ── Page titles ── */
 .page-title {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Syne', sans-serif;
     font-size: 2rem;
     font-weight: 800;
-    letter-spacing: -0.02em;
-    color: #0b1020;
+    color: #2D3A4A;
     margin-bottom: 4px;
+    animation: fadeDown 0.5s ease both;
 }
 .page-sub {
-    color: #334155;
-    font-size: 0.95rem;
-    font-weight: 500;
+    color: #6B7B8D;
+    font-size: 0.93rem;
     margin-bottom: 28px;
+    animation: fadeDown 0.5s ease 0.1s both;
 }
 
 /* ── Hero ── */
 .hero-wrap {
-    background: linear-gradient(135deg,
-        rgba(199,210,254,0.6) 0%,
-        rgba(186,230,253,0.6) 50%,
-        rgba(220,252,231,0.5) 100%);
-    border: 1px solid rgba(99,102,241,0.2);
-    border-radius: 28px;
-    padding: 60px 48px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 36px;
-    backdrop-filter: blur(8px);
+    background: #D6DEF0 !important;
+    border: 1px solid rgba(123,143,212,0.25) !important;
+    border-radius: 28px !important;
+    padding: 60px 48px !important;
+    text-align: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+    margin-bottom: 36px !important;
+    animation: fadeScale 0.7s ease both;
 }
 .hero-glow-left {
     position: absolute; top: -80px; left: -80px;
     width: 340px; height: 340px;
-    background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(123,143,212,0.18) 0%, transparent 70%);
     pointer-events: none;
+    animation: pulseGlow 4s ease-in-out infinite;
 }
 .hero-glow-right {
     position: absolute; bottom: -80px; right: -80px;
     width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(8,145,178,0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(107,174,214,0.15) 0%, transparent 70%);
     pointer-events: none;
+    animation: pulseGlow 4s ease-in-out 2s infinite;
 }
 .hero-badge {
-    display: inline-block;
-    background: rgba(30,27,75,0.08);
-    border: 1px solid rgba(30,27,75,0.25);
-    border-radius: 20px;
-    padding: 5px 18px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: #1e1b4b;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    margin-bottom: 22px;
+    display: inline-block !important;
+    background: rgba(123,143,212,0.15) !important;
+    border: 1px solid rgba(123,143,212,0.35) !important;
+    border-radius: 20px !important;
+    padding: 5px 18px !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    color: #5A6FA8 !important;
+    letter-spacing: 1.8px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 22px !important;
     animation: fadeDown 0.6s ease both;
 }
 .hero-title {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 3.6rem;
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.035em;
-    color: #0b1020;
-    margin: 0 0 18px;
+    font-family: 'Syne', sans-serif !important;
+    font-size: 3.8rem !important;
+    font-weight: 800 !important;
+    line-height: 1.05 !important;
+    background: linear-gradient(135deg, #2D3A4A 0%, #5A6FA8 50%, #6BAED6 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    margin: 0 0 18px !important;
+    display: block !important;
     animation: fadeDown 0.7s ease 0.1s both;
 }
 .hero-sub {
-    font-size: 1.05rem;
-    color: #1f2937;
-    font-weight: 500;
-    max-width: 560px;
-    margin: 0 auto 36px;
-    line-height: 1.7;
+    font-size: 1.05rem !important;
+    color: #5A6B7D !important;
+    max-width: 500px !important;
+    margin: 0 auto 36px !important;
+    line-height: 1.75 !important;
+    display: block !important;
     animation: fadeDown 0.7s ease 0.2s both;
 }
 .hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 52px;
-    flex-wrap: wrap;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 52px !important;
     animation: fadeDown 0.7s ease 0.3s both;
 }
-.hstat { text-align: center; }
+.hstat { text-align: center !important; }
 .hstat-val {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: #0b1020;
-    display: block;
+    font-family: 'Syne', sans-serif !important;
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    color: #2D3A4A !important;
+    display: block !important;
 }
 .hstat-lbl {
-    font-size: 0.74rem;
-    color: #1e293b;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
+    font-size: 0.72rem !important;
+    color: #8899AA !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.2px !important;
 }
 
 /* ── Metric cards ── */
 div[data-testid="metric-container"] {
-    background: rgba(255,255,255,0.85) !important;
-    border: 1px solid rgba(99,102,241,0.2) !important;
+    background: #DFE5F0 !important;
+    border: 1px solid rgba(123,143,212,0.20) !important;
     border-radius: 18px !important;
     padding: 20px 24px !important;
-    backdrop-filter: blur(6px);
-    box-shadow: 0 2px 16px rgba(99,102,241,0.07);
+    box-shadow: 0 2px 12px rgba(123,143,212,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slideUp 0.5s ease both;
+}
+div[data-testid="metric-container"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(123,143,212,0.15);
 }
 div[data-testid="metric-container"] label {
-    color: #1e293b !important;
-    font-weight: 600 !important;
-    font-size: 0.85rem !important;
+    color: #6B7B8D !important;
+    font-size: 0.82rem !important;
 }
 div[data-testid="metric-container"] [data-testid="metric-value"] {
-    color: #0b1020 !important;
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.02em !important;
+    color: #2D3A4A !important;
+    font-family: 'Syne', sans-serif !important;
+    font-weight: 700 !important;
 }
 
 /* ── Segment / general cards ── */
 .seg-card {
-    background: rgba(255,255,255,0.88);
-    border: 1px solid rgba(99,102,241,0.18);
-    border-radius: 20px;
-    padding: 24px 28px;
-    margin-bottom: 14px;
-    backdrop-filter: blur(6px);
-    box-shadow: 0 2px 20px rgba(99,102,241,0.06);
-    animation: fadeUp 0.5s ease both;
-    transition: transform 0.2s, box-shadow 0.2s;
-    color: #0f172a;
+    background: #DFE5F0 !important;
+    border: 1px solid rgba(123,143,212,0.18) !important;
+    border-radius: 20px !important;
+    padding: 24px 28px !important;
+    margin-bottom: 14px !important;
+    box-shadow: 0 2px 16px rgba(123,143,212,0.07);
+    animation: slideUp 0.5s ease both;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .seg-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 32px rgba(99,102,241,0.14);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(123,143,212,0.15);
+    border-color: rgba(123,143,212,0.35) !important;
 }
 
 /* ── Pills ── */
 .pill {
-    display: inline-block;
-    background: rgba(30,27,75,0.06);
-    border: 1px solid rgba(30,27,75,0.18);
-    border-radius: 20px;
-    padding: 4px 13px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: #1e1b4b;
-    margin: 3px 3px 3px 0;
+    display: inline-block !important;
+    background: rgba(123,143,212,0.10) !important;
+    border: 1px solid rgba(123,143,212,0.22) !important;
+    border-radius: 20px !important;
+    padding: 4px 13px !important;
+    font-size: 0.77rem !important;
+    color: #5A6FA8 !important;
+    margin: 3px 3px 3px 0 !important;
 }
 
 /* ── Prediction result card ── */
 .pred-card {
-    background: rgba(255,255,255,0.95);
-    border: 2px solid rgba(99,102,241,0.3);
-    border-radius: 24px;
-    padding: 32px;
-    text-align: center;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 32px rgba(99,102,241,0.12);
-    animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+    background: #DFE5F0 !important;
+    border: 2px solid rgba(123,143,212,0.30) !important;
+    border-radius: 24px !important;
+    padding: 32px !important;
+    text-align: center !important;
+    box-shadow: 0 4px 28px rgba(123,143,212,0.12);
+    animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
 }
 .pred-name {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.85rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin: 10px 0 6px;
+    font-family: 'Syne', sans-serif !important;
+    font-size: 1.85rem !important;
+    font-weight: 800 !important;
+    margin: 10px 0 6px !important;
+    display: block !important;
 }
 .action-box {
-    background: rgba(30,27,75,0.05);
-    border-radius: 14px;
-    padding: 14px 18px;
-    text-align: left;
-    border-left: 3px solid #1e1b4b;
-    margin-top: 18px;
+    background: rgba(123,143,212,0.08) !important;
+    border-radius: 14px !important;
+    padding: 14px 18px !important;
+    text-align: left !important;
+    border-left: 3px solid #7B8FD4 !important;
+    margin-top: 18px !important;
 }
 .action-lbl {
-    color: #1e1b4b;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    margin-bottom: 5px;
+    color: #5A6FA8 !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.4px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 5px !important;
+    display: block !important;
 }
 .conf-badge {
-    display: inline-block;
-    background: rgba(14,116,144,0.1);
-    border: 1px solid rgba(14,116,144,0.35);
-    border-radius: 20px;
-    padding: 5px 18px;
-    color: #0b4a5c;
-    font-size: 0.86rem;
-    font-weight: 700;
-    margin-top: 16px;
+    display: inline-block !important;
+    background: rgba(107,174,214,0.15) !important;
+    border: 1px solid rgba(107,174,214,0.35) !important;
+    border-radius: 20px !important;
+    padding: 5px 18px !important;
+    color: #5A8EB5 !important;
+    font-size: 0.84rem !important;
+    font-weight: 600 !important;
+    margin-top: 16px !important;
 }
 
 /* ── Empty state ── */
 .empty-state {
-    background: rgba(255,255,255,0.6);
-    border: 1px dashed rgba(99,102,241,0.3);
-    border-radius: 20px;
-    padding: 64px 32px;
-    text-align: center;
-    color: #334155;
-    font-weight: 500;
+    background: #DFE5F0 !important;
+    border: 1px dashed rgba(123,143,212,0.30) !important;
+    border-radius: 20px !important;
+    padding: 64px 32px !important;
+    text-align: center !important;
+    color: #8899AA !important;
+    animation: fadeScale 0.5s ease both;
 }
 
 /* ── Buttons ── */
 .stButton > button {
-    background: linear-gradient(135deg, #1e1b4b, #0e7490) !important;
-    color: #ffffff !important;
+    background: linear-gradient(135deg, #7B8FD4, #6BAED6) !important;
+    color: #FFFFFF !important;
     border: none !important;
     border-radius: 14px !important;
     padding: 14px 32px !important;
-    font-weight: 700 !important;
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
-    letter-spacing: 0.01em !important;
+    font-weight: 600 !important;
     width: 100% !important;
-    box-shadow: 0 4px 18px rgba(30,27,75,0.28) !important;
-    transition: opacity 0.2s, transform 0.15s !important;
+    box-shadow: 0 4px 18px rgba(123,143,212,0.25) !important;
+    transition: opacity 0.2s, transform 0.25s ease, box-shadow 0.25s ease !important;
 }
 .stButton > button:hover {
     opacity: 0.92 !important;
-    transform: translateY(-1px) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 24px rgba(123,143,212,0.35) !important;
 }
 
 /* ── Download button ── */
 .stDownloadButton > button {
-    background: rgba(255,255,255,0.9) !important;
-    color: #1e1b4b !important;
-    border: 1px solid rgba(30,27,75,0.3) !important;
+    background: #DFE5F0 !important;
+    color: #5A6FA8 !important;
+    border: 1px solid rgba(123,143,212,0.30) !important;
     border-radius: 12px !important;
-    font-weight: 700 !important;
+    font-weight: 600 !important;
     box-shadow: none !important;
 }
 
 /* ── Section headings ── */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
-    color: #0b1020 !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.02em !important;
-}
-
-/* Generic text */
-p, span, label, li, div[data-testid="stMarkdownContainer"] {
-    color: #0f172a;
+h1, h2, h3, h4, h5 {
+    font-family: 'Syne', sans-serif !important;
+    color: #2D3A4A !important;
 }
 
 /* ── Expander ── */
 div[data-testid="stExpander"] {
-    background: rgba(255,255,255,0.8);
-    border: 1px solid rgba(99,102,241,0.2);
-    border-radius: 16px;
-}
-div[data-testid="stExpander"] summary,
-div[data-testid="stExpander"] p {
-    color: #0b1020 !important;
-    font-weight: 700 !important;
+    background: #DFE5F0 !important;
+    border: 1px solid rgba(123,143,212,0.18) !important;
+    border-radius: 16px !important;
 }
 
 /* ── File uploader ── */
 div[data-testid="stFileUploader"] {
-    background: rgba(255,255,255,0.8);
-    border-radius: 16px;
-    border: 1px dashed rgba(30,27,75,0.3);
-    padding: 16px;
-}
-div[data-testid="stFileUploader"] * {
-    color: #1e293b !important;
+    background: #DFE5F0 !important;
+    border-radius: 16px !important;
+    border: 1px dashed rgba(123,143,212,0.35) !important;
+    padding: 16px !important;
 }
 
 /* ── Radio buttons ── */
 div[role="radiogroup"] label {
-    color: #0f172a !important;
-    font-weight: 600;
+    color: #3D4D5C !important;
+    font-weight: 500;
 }
-
-/* ── Image captions ── */
-.gallery-cap {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #0b1020;
-    font-weight: 700;
-    font-size: 0.95rem;
-    margin: 6px 0 18px;
-    text-align: center;
-    letter-spacing: -0.01em;
+div[role="radiogroup"] label:hover {
+    color: #5A6FA8 !important;
 }
 
 /* ── Animations ── */
@@ -388,13 +348,21 @@ div[role="radiogroup"] label {
     from { opacity:0; transform:translateY(-14px); }
     to   { opacity:1; transform:translateY(0); }
 }
-@keyframes fadeUp {
-    from { opacity:0; transform:translateY(14px); }
+@keyframes slideUp {
+    from { opacity:0; transform:translateY(20px); }
     to   { opacity:1; transform:translateY(0); }
 }
 @keyframes popIn {
-    from { opacity:0; transform:scale(0.91); }
+    from { opacity:0; transform:scale(0.88); }
     to   { opacity:1; transform:scale(1); }
+}
+@keyframes fadeScale {
+    from { opacity:0; transform:scale(0.96) translateY(8px); }
+    to   { opacity:1; transform:scale(1) translateY(0); }
+}
+@keyframes pulseGlow {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.08); }
 }
 </style>
 """

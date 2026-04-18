@@ -5,7 +5,7 @@ from utils import SEGMENT_CONFIG, COLOR_MAP, APP_CSS, load_rfm_data
 from predict import load_models, predict_single, predict_batch
 from components import (
     render_hero, render_kpis, render_scatter, render_donut,
-    render_rfm_averages, render_2d_scatter,
+    render_rfm_averages, render_cluster_view,
     render_prediction_card, render_confidence_chart,
     render_batch_summary, render_segment_guide,
 )
@@ -28,22 +28,17 @@ with st.sidebar:
     st.markdown('<div class="sidebar-logo">🛍️ ShopLens</div>', unsafe_allow_html=True)
     st.markdown("---")
 
-    page = st.radio(
-        "Navigation",
-        [
-            "🏠  Home",
-            "📊  Dashboard",
-            "🔍  Single Prediction",
-            "📁  Batch Prediction",
-            "🎯  Segment Guide",
-        ],
-        label_visibility="collapsed",
-        key="main_nav_radio",
-    )
+    page = st.radio("", [
+        "🏠  Home",
+        "📊  Dashboard",
+        "🔍  Single Prediction",
+        "📁  Batch Prediction",
+        "🎯  Segment Guide",
+    ], label_visibility="collapsed")
 
     st.markdown("---")
     st.markdown(
-        "<div style='font-size:0.72rem;color:#334155;text-transform:uppercase;"
+        "<div style='font-size:0.72rem;color:#5A6B7D;text-transform:uppercase;"
         "letter-spacing:1.2px;margin-bottom:10px'>Model Info</div>",
         unsafe_allow_html=True
     )
@@ -80,7 +75,7 @@ if "Home" in page:
             'K-Means groups customers into 5 natural segments. An Autoencoder compresses features. Random Forest predicts new customers.',
             'Each segment gets a tailored marketing recommendation. From Champions to Lost Customers — every group has a clear next step.'
         ],
-        ['#FFD700', '#A78BFA', '#3ECFCF']
+        ['#7B8FD4', '#6BAED6', '#74C4B7']
     ):
         with col:
             st.markdown(f"""
@@ -90,10 +85,10 @@ if "Home" in page:
                             font-weight:800;color:{color};opacity:0.4;
                             margin-bottom:10px">{num}</div>
                 <div style="font-family:'Syne',sans-serif;font-size:1.05rem;
-                            font-weight:700;color:#f1f5f9;margin-bottom:10px">
+                            font-weight:700;color:#2D3A4A;margin-bottom:10px">
                     {title}
                 </div>
-                <div style="color:#475569;font-size:0.88rem;line-height:1.65">
+                <div style="color:#5A6B7D;font-size:0.88rem;line-height:1.65">
                     {desc}
                 </div>
             </div>
@@ -122,8 +117,8 @@ if "Home" in page:
                             font-weight:700;color:{cfg['color']};margin:8px 0 4px">
                     {seg}
                 </div>
-                <div style="font-size:1.4rem;font-weight:700;color:#fff">{n:,}</div>
-                <div style="color:#334155;font-size:0.72rem">customers</div>
+                <div style="font-size:1.4rem;font-weight:700;color:#2D3A4A">{n:,}</div>
+                <div style="color:#5A6B7D;font-size:0.72rem">customers</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -147,8 +142,8 @@ elif "Dashboard" in page:
     st.markdown("#### Average RFM Values per Segment")
     render_rfm_averages(rfm, COLOR_MAP)
 
-    st.markdown("🧊 Cluster View")
-    render_2d_scatter(rfm, COLOR_MAP)
+    st.markdown("#### Customer Cluster Map")
+    render_cluster_view(rfm, COLOR_MAP)
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # SINGLE PREDICTION
@@ -183,7 +178,7 @@ elif "Single" in page:
 
         st.markdown("---")
         st.markdown(
-            "<div style='font-size:0.85rem;color:#475569;margin-bottom:8px'>"
+            "<div style='font-size:0.85rem;color:#5A6B7D;margin-bottom:8px'>"
             "Or type exact values</div>",
             unsafe_allow_html=True
         )
@@ -213,7 +208,7 @@ elif "Single" in page:
                 <div style="font-size:2.8rem;margin-bottom:14px">🔍</div>
                 <div style="font-size:0.95rem">
                     Adjust the sliders and click<br>
-                    <span style="color:#8b5cf6;font-weight:600">Predict Segment</span>
+                    <span style="color:#7B8FD4;font-weight:600">Predict Segment</span>
                 </div>
             </div>
             """, unsafe_allow_html=True)
