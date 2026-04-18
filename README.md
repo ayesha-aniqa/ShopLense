@@ -132,7 +132,7 @@ http://localhost:8501
 
 ## 🌐 Live Demo
 
-🔗 [Click here to open ShopLens]() — *link will be added after deployment*
+🔗 [Click here to open ShopLens](https://shoplense-a9wynzhws6nwg7jubzjhle.streamlit.app/)
 
 ---
 
