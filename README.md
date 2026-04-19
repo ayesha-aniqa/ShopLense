@@ -49,9 +49,7 @@ Given a dataset of real e-commerce transactions, can we:
 
 ## 🏗️ Project Workflow
 ```
-Data Collection → EDA → Preprocessing → RFM Features
-→ Clustering (K-Means + DBSCAN) → Autoencoder (DL)
-→ Classifier Training → Streamlit App → Deployment
+![Project Flowchart](ShopLens_Flowchart.jpg)
 ```
 
 ---
@@ -59,9 +57,6 @@ Data Collection → EDA → Preprocessing → RFM Features
 ## 📁 Folder Structure
 ```
 shoplens/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml        # CI/CD auto deployment
 ├── app/
 │   ├── main.py               # Streamlit entry point
 │   ├── predict.py            # Prediction pipeline
@@ -73,7 +68,7 @@ shoplens/
 │   └── sample/               # Small sample for testing
 ├── models/
 │   ├── kmeans_model.pkl      # Trained K-Means
-│   ├── autoencoder_model.h5  # Trained Autoencoder
+│   ├── autoencoder_model.pkl  # Trained Autoencoder
 │   └── classifier_rf.pkl     # Trained Random Forest
 ├── notebooks/
 │   ├── 01_eda.ipynb
@@ -82,7 +77,7 @@ shoplens/
 │   ├── 04_autoencoder.ipynb
 │   └── 05_classifier.ipynb
 ├── reports/
-│   ├── final_report.pdf
+│   ├── (Auto-generated Visuals)
 │   └── presentation_slides.pdf
 ├── .gitignore
 ├── LICENSE
@@ -109,7 +104,7 @@ shoplens/
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/your-username/shoplens.git
+https://github.com/ayesha-aniqa/ShopLense.git
 cd shoplens
 ```
 
@@ -120,7 +115,7 @@ pip install -r requirements.txt
 
 **3. Run the Streamlit app**
 ```bash
-streamlit run app/main.py
+python -m streamlit run app/main.py
 ```
 
 **4. Open in browser**
@@ -132,7 +127,7 @@ http://localhost:8501
 
 ## 🌐 Live Demo
 
-🔗 [Click here to open ShopLens](https://shoplense-a9wynzhws6nwg7jubzjhle.streamlit.app/)
+🔗 [Click here to open ShopLens](https://shoplense-uajvuijwwtzy3wgermg9ae.streamlit.app/)
 
 ---
 
@@ -175,6 +170,7 @@ AI/ML Fellowship
 📧 codeaisha123@gmail.com
 🔗 [LinkedIn](in/ayesha-aniqa-342220282)
 🐙 [GitHub](https://github.com/ayesha-aniqa)
+📖 [Medium](https://medium.com/@codeaisha123)
 
 ---
 
