@@ -59,9 +59,6 @@ Data Collection → EDA → Preprocessing → RFM Features
 ## 📁 Folder Structure
 ```
 shoplens/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml        # CI/CD auto deployment
 ├── app/
 │   ├── main.py               # Streamlit entry point
 │   ├── predict.py            # Prediction pipeline
@@ -82,7 +79,6 @@ shoplens/
 │   ├── 04_autoencoder.ipynb
 │   └── 05_classifier.ipynb
 ├── reports/
-│   ├── final_report.pdf
 │   └── presentation_slides.pdf
 ├── .gitignore
 ├── LICENSE
@@ -109,7 +105,7 @@ shoplens/
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/your-username/shoplens.git
+https://github.com/ayesha-aniqa/ShopLense.git
 cd shoplens
 ```
 
@@ -120,7 +116,7 @@ pip install -r requirements.txt
 
 **3. Run the Streamlit app**
 ```bash
-streamlit run app/main.py
+python -m streamlit run app/main.py
 ```
 
 **4. Open in browser**
@@ -175,6 +171,7 @@ AI/ML Fellowship
 📧 codeaisha123@gmail.com
 🔗 [LinkedIn](in/ayesha-aniqa-342220282)
 🐙 [GitHub](https://github.com/ayesha-aniqa)
+📖 [Medium](https://medium.com/@codeaisha123)
 
 ---
 
