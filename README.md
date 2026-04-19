@@ -76,8 +76,11 @@ shoplens/
 │   ├── 04_autoencoder.ipynb
 │   └── 05_classifier.ipynb
 ├── reports/
-│   ├── (Auto-generated Visuals)
-│   └── presentation_slides.pdf
+│   └── (Auto-generated Visuals)
+├── assesments/
+│   ├── ShopLens_Presentation.pdf
+│   ├── ShopLens_Report.pdf
+│   └── ShopLens_TimePlan.xlsx
 ├── .gitignore
 ├── LICENSE
 ├── README.md
