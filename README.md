@@ -131,7 +131,7 @@ http://localhost:8501
 
 ## 📝 Medium Article
 
-📖 [Read the full project walkthrough]() — *link will be added after publishing*
+📖 [Read the full project walkthrough](https://medium.com/p/cce294395be3?postPublishedType=initial) 
 
 ---
 
