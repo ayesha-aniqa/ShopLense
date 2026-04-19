@@ -73,7 +73,7 @@ shoplens/
 │   └── sample/               # Small sample for testing
 ├── models/
 │   ├── kmeans_model.pkl      # Trained K-Means
-│   ├── autoencoder_model.h5  # Trained Autoencoder
+│   ├── autoencoder_model.pkl  # Trained Autoencoder
 │   └── classifier_rf.pkl     # Trained Random Forest
 ├── notebooks/
 │   ├── 01_eda.ipynb
