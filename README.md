@@ -49,9 +49,8 @@ Given a dataset of real e-commerce transactions, can we:
 
 ## 🏗️ Project Workflow
 ```
-Data Collection → EDA → Preprocessing → RFM Features
-→ Clustering (K-Means + DBSCAN) → Autoencoder (DL)
-→ Classifier Training → Streamlit App → Deployment
+<img width="1481" height="784" alt="flowchart" src="https://github.com/user-attachments/assets/bddc8aa1-55a3-4577-bb63-5efb8dbdce67" />
+
 ```
 
 ---
@@ -79,6 +78,7 @@ shoplens/
 │   ├── 04_autoencoder.ipynb
 │   └── 05_classifier.ipynb
 ├── reports/
+│   ├── (Auto-generated Visuals)
 │   └── presentation_slides.pdf
 ├── .gitignore
 ├── LICENSE
