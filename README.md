@@ -48,7 +48,7 @@ Given a dataset of real e-commerce transactions, can we:
 ---
 
 ## 🏗️ Project Workflow
-![Flowchart](ShopLens_Flowchart.jpg)
+![Flowchart](reports/ShopLens_Flowchart.jpg)
 
 
 ---
@@ -80,7 +80,6 @@ shoplens/
 │   └── presentation_slides.pdf
 ├── .gitignore
 ├── LICENSE
-├── PROGRESS.md
 ├── README.md
 └── requirements.txt
 ```
