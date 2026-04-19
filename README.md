@@ -49,7 +49,8 @@ Given a dataset of real e-commerce transactions, can we:
 
 ## 🏗️ Project Workflow
 ```
-![project Flpwchart](reports/flowchart.jpg)
+<img width="353" height="565" alt="image" src="https://github.com/user-attachments/assets/baef6f17-0a1e-4bed-98e7-56152fdd10db" />
+
 ```
 
 ---
