@@ -49,7 +49,7 @@ Given a dataset of real e-commerce transactions, can we:
 
 ## 🏗️ Project Workflow
 ```
-https://githubusercontent.com[ayesha-aniqa]/[https://github.com/ayesha-aniqa/ShopLense.git]/main/reports/flowchart.jpg
+![project Flpwchart](reports/flowchart.jpg)
 ```
 
 ---
