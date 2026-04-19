@@ -49,7 +49,7 @@ Given a dataset of real e-commerce transactions, can we:
 
 ## 🏗️ Project Workflow
 ```
-![Project Flowchart](reports/ShopLens_Flowchart.jpg)
+![Project Flowchart](ShopLens_Flowchart.jpg)
 ```
 
 ---
