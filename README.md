@@ -77,7 +77,7 @@ shoplens/
 │   └── 05_classifier.ipynb
 ├── reports/
 │   └── (Auto-generated Visuals)
-├── assesments/
+├── docs/
 │   ├── ShopLens_Presentation.pdf
 │   ├── ShopLens_Report.pdf
 │   └── ShopLens_TimePlan.xlsx
