@@ -137,6 +137,17 @@ http://localhost:8501
 📖 [Read the full project walkthrough](https://medium.com/p/cce294395be3?postPublishedType=initial) 
 
 ---
+## 📊 Presentation Slides
+🖥️ [View the Project Slides](https://drive.google.com/file/d/1SaeyGNLOHs6wmfI5lDI1S-iRMOXReZjE/view?usp=sharing)
+
+---
+## 📄 Project Report
+📑 [Read the Full Report (PDF)]https://docs.google.com/spreadsheets/d/1tn_nKTAWPqst1qZdgIAKtAAvFZWxQRMe/edit?usp=sharing&ouid=118077004305094511429&rtpof=true&sd=true)
+
+---
+## 🗂️ Execution Plan
+📋 [View the Execution Plan](https://docs.google.com/spreadsheets/d/1tn_nKTAWPqst1qZdgIAKtAAvFZWxQRMe/edit?usp=sharing&ouid=118077004305094511429&rtpof=true&sd=true)
+
 
 ## 📈 Results
 
