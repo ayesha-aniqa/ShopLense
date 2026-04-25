@@ -142,7 +142,7 @@ http://localhost:8501
 
 ---
 ## 📄 Project Report
-📑 [Read the Full Report (PDF)]https://docs.google.com/spreadsheets/d/1tn_nKTAWPqst1qZdgIAKtAAvFZWxQRMe/edit?usp=sharing&ouid=118077004305094511429&rtpof=true&sd=true)
+📑 [Read the Full Report (PDF)](https://drive.google.com/file/d/19gU_ldBhZu9TqQE2N_au_-SsTT-S9zhh/view?usp=sharing)
 
 ---
 ## 🗂️ Execution Plan
